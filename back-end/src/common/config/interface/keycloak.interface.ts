@@ -5,4 +5,7 @@ export interface KeycloakConfig {
   secret: string;
   logLevels: string;
   useNestLogger: boolean;
+  jwksRequestsPerMinute: number;
+  issuer: string;
+  jwksUri: string;
 }

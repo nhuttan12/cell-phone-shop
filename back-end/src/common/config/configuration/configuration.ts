@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import * as yaml from 'js-yaml';
 import { join } from 'path';
-import { AppConfig } from './interface/config.interface';
+import { AppConfig } from '../interface/config.interface';
 
 const YAML_CONFIG_FILENAME = 'config.env.yaml';
 

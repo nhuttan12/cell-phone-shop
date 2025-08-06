@@ -1,11 +1,13 @@
 import { DatabaseConfig } from './database.interface';
 import { HttpConfig } from './http.interface';
 import { KeycloakConfig } from './keycloak.interface';
+import { KeycloakDatabaseConfig } from './keycloak-database.interface';
 
 export interface AppConfig {
   http: HttpConfig;
-  db: {
+  database: {
     postgres: DatabaseConfig;
   };
   keycloak: KeycloakConfig;
+  keycloakDatabase: KeycloakDatabaseConfig;
 }

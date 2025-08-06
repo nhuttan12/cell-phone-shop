@@ -1,5 +1,5 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { AppConfigService } from '../../modules/config/app-config.service';
+import { AppConfigService } from '../config/app-config.service';
 import { WinstonModule } from 'nest-winston';
 import { format, transports } from 'winston';
 import { utilities as nestWinstonModuleUtilities } from 'nest-winston/dist/winston.utilities';

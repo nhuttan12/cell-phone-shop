@@ -6,12 +6,15 @@ import {
   RoleGuard,
 } from 'nest-keycloak-connect';
 import { ConfigModule } from '@nestjs/config';
-import configuration from './common/config/configuration';
-import { validationSchema } from './common/config/schema-validation';
+import configuration from './common/config/configuration/configuration';
+import { validationSchema } from './common/config/schema/schema-validation';
 import { APP_GUARD } from '@nestjs/core';
 import { LoggerModule } from './common/logger/logger.module';
-import { KeycloakConfigService } from './modules/config/keycloak-config.service';
-import { AppConfigModule } from './modules/config/app-config.module';
+import { KeycloakConfigService } from './common/config/keycloak-config.service';
+import { AppConfigModule } from './common/config/app-config.module';
+import { TypeormModule } from './common/database/typeorm/typeorm.module';
+import { KeycloakTypeormModule } from './common/database/keycloak/keycloak-typeorm.module';
+import { AutoMapperModule } from './common/auto-mapper/auto-mapper.module';
 
 @Module({
   imports: [
@@ -26,6 +29,9 @@ import { AppConfigModule } from './modules/config/app-config.module';
       imports: [ConfigModule],
     }),
     LoggerModule.forRootAsync(),
+    TypeormModule.forRootAsync(),
+    KeycloakTypeormModule.forRootAsync(),
+    AutoMapperModule,
   ],
   providers: [
     {

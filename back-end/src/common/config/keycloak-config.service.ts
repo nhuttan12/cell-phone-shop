@@ -4,7 +4,7 @@ import {
   KeycloakConnectOptionsFactory,
 } from 'nest-keycloak-connect';
 import { AppConfigService } from './app-config.service';
-import { KeycloakConfig } from '../../common/config/interface/keycloak.interface';
+import { KeycloakConfig } from './interface/keycloak.interface';
 
 @Injectable()
 export class KeycloakConfigService implements KeycloakConnectOptionsFactory {
