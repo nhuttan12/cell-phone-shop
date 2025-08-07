@@ -3,23 +3,24 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AppConfigService } from './app-config.service';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { HttpConfig } from './interface/http.interface';
-import { DatabaseConfig } from './interface/database.interface';
+import { MainDatabaseConfig } from './interface/main-database.interface';
 import { KeycloakDatabaseConfig } from './interface/keycloak-database.interface';
 import { KeycloakConfig } from './interface/keycloak.interface';
 import { Logger } from 'winston';
+import { DatabaseConfig } from './interface/database-config.interface';
 
 describe('AppConfigService', () => {
   let appConfigService: AppConfigService;
   let mockLogger: Logger;
 
   const mockHttpConfig: HttpConfig = {
-    port: 3000,
-    useJsonLogger: true,
-    debug: true,
     host: 'localhost',
+    port: 3000,
+    debug: true,
+    useJsonLogger: true,
   };
 
-  const mockDatabaseConfig: DatabaseConfig = {
+  const mockMainDatabaseConfig: MainDatabaseConfig = {
     dialect: 'postgres',
     host: 'localhost',
     port: 3306,
@@ -40,6 +41,7 @@ describe('AppConfigService', () => {
     jwksUri:
       'http://localhost:8080/auth/realms/test/protocol/openid-connect/certs',
   };
+
   const mockKeycloakDatabaseConfig: KeycloakDatabaseConfig = {
     realmId: 'test',
     dialect: 'postgres',
@@ -48,6 +50,11 @@ describe('AppConfigService', () => {
     username: 'root',
     password: 'password',
     database: 'test',
+  };
+
+  const mockDatabaseConfig: DatabaseConfig = {
+    main: mockMainDatabaseConfig,
+    keycloak: mockKeycloakDatabaseConfig,
   };
 
   beforeEach(async () => {
@@ -67,11 +74,14 @@ describe('AppConfigService', () => {
                 case 'http':
                   return mockHttpConfig;
                 case 'database':
-                  return mockDatabaseConfig;
+                  return {
+                    main: mockMainDatabaseConfig,
+                    keycloak: mockKeycloakDatabaseConfig,
+                  };
                 case 'keycloak':
                   return mockKeycloakConfig;
-                case 'keycloakDatabase':
-                  return mockKeycloakDatabaseConfig;
+                default:
+                  throw new Error(`Unexpected config key: ${key}`);
               }
             }),
           },
@@ -83,7 +93,7 @@ describe('AppConfigService', () => {
       ],
     }).compile();
 
-    appConfigService = module.get<AppConfigService>(ConfigService);
+    appConfigService = module.get<AppConfigService>(AppConfigService);
   });
 
   // 1. Testing appConfigService is defined
@@ -99,21 +109,24 @@ describe('AppConfigService', () => {
     // 2.2. Expect result is equal to mockHttpConfig
     expect(result).toEqual(mockHttpConfig);
 
-    // 2.3. Expect logger show debug info with signature is 'httpConfig' and mockHttpConfig param
-    expect(mockLogger.debug).toHaveBeenCalledWith('httpConfig', mockHttpConfig);
+    // 2.3. Expect logger show debug info with signature is 'http config information' and mockHttpConfig param
+    expect(mockLogger.debug).toHaveBeenCalledWith(
+      'http config information',
+      mockHttpConfig,
+    );
   });
 
-  // 3. Testing get database config with appConfigService
-  it('should return database config and log it', () => {
-    // 3.1. Testing calling get database config
-    const result: DatabaseConfig = appConfigService.postgresDatabase;
+  // 3. Testing get main database config with appConfigService
+  it('should return main database config and log it', () => {
+    // 3.1. Testing calling get main database config
+    const result: MainDatabaseConfig = appConfigService.mainDatabase;
 
     // 3.2. Expect result is equal to mockDatabaseConfig
-    expect(result).toEqual(mockDatabaseConfig);
+    expect(result).toEqual(mockMainDatabaseConfig);
 
     // 3.3. Expect logger show debug info with signature is 'databaseConfig' and mockDatabaseConfig param
     expect(mockLogger.debug).toHaveBeenCalledWith(
-      'databaseConfig',
+      'main database config information',
       mockDatabaseConfig,
     );
   });
@@ -128,13 +141,13 @@ describe('AppConfigService', () => {
 
     // 4.3. Expect logger show debug info with signature is 'keycloakConfig' and mockKeycloakConfig param
     expect(mockLogger.debug).toHaveBeenCalledWith(
-      'keycloakConfig',
+      'keycloak config information',
       mockKeycloakConfig,
     );
   });
 
   // 5. Testing get keycloakDatabase config with appConfigService
-  it('should return keycloakDatabase config and log it', () => {
+  it('should return keycloak database config and log it', () => {
     // 5.1. Testing calling get keycloakDatabase config
     const result: KeycloakDatabaseConfig = appConfigService.keycloakDatabase;
 
@@ -143,8 +156,8 @@ describe('AppConfigService', () => {
 
     // 5.3. Expect logger show debug info with signature is 'keycloakDatabaseConfig' and mockKeycloakDatabaseConfig param
     expect(mockLogger.debug).toHaveBeenCalledWith(
-      'keycloakDatabaseConfig',
-      mockKeycloakDatabaseConfig,
+      'keycloak database config information',
+      mockDatabaseConfig,
     );
   });
 });

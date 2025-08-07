@@ -1,4 +1,4 @@
-export interface DatabaseConfig {
+export interface MainDatabaseConfig {
   dialect: string;
   host: string;
   port: number;
