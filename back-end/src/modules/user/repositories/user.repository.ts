@@ -8,14 +8,18 @@ import { AppConfigService } from '../../../common/config/app-config.service';
 
 @Injectable()
 export class UserRepository {
+  private readonly realmId: string;
+
   constructor(
-    @InjectRepository(KeycloakUser, 'keycloak')
+    @InjectRepository(KeycloakUser)
     private readonly userRepo: Repository<KeycloakUser>,
     @Inject(WINSTON_MODULE_NEST_PROVIDER)
     private readonly logger: Logger,
     private readonly dataSource: DataSource,
     private readonly config: AppConfigService,
-  ) {}
+  ) {
+    this.realmId = this.config.keycloakDatabase.realmId;
+  }
 
   async getUserByUserID(UserID: string): Promise<KeycloakUser | null> {
     try {
@@ -27,12 +31,12 @@ export class UserRepository {
         .leftJoinAndSelect('user.roleMappings', 'urm')
         .leftJoinAndSelect('urm.role', 'role')
         .where('user.realmId = :realmId', {
-          realmId: this.config.keycloakDatabase.realmId,
+          realmId: this.realmId,
         })
         .andWhere('user.id = :id', { id: UserID })
         .getOne();
       this.logger.debug(
-        'GEt user by user ID join with keycloak role table',
+        'Get user by user ID join with keycloak role table',
         userWithRoles,
       );
 

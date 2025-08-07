@@ -52,10 +52,6 @@ export class KeycloakUser {
   @AutoMap()
   realmId: string;
 
-  @Column({ name: 'created_timestamp' })
-  @AutoMap()
-  createdAt: Date;
-
   @OneToMany(() => UserRoleMapping, (mapping: UserRoleMapping) => mapping.user)
   roleMappings: UserRoleMapping[];
 }

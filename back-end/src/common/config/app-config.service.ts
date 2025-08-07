@@ -25,10 +25,12 @@ export class AppConfigService {
     return httpConfig;
   }
 
-  get database(): DatabaseConfig {
-    const databaseConfig: DatabaseConfig =
-      this.configSerivce.getOrThrow('database');
+  get postgresDatabase(): DatabaseConfig {
+    const databaseConfig = this.configSerivce.getOrThrow('database');
     this.logger.debug('databaseConfig', databaseConfig);
+
+    const postgresConfig = databaseConfig.postgres;
+    this.logger.debug('postgresConfig', postgresConfig);
 
     return databaseConfig;
   }

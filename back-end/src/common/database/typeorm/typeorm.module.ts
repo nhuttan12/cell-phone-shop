@@ -13,12 +13,12 @@ export class TypeormModule {
         TypeOrmModule.forRootAsync({
           inject: [AppConfigService],
           useFactory: (config: AppConfigService) => ({
-            type: config.database.dialect as SupportedDB,
-            host: config.database.host,
-            port: config.database.port,
-            username: config.database.username,
-            password: config.database.password,
-            database: config.database.database,
+            type: config.postgresDatabase.dialect as SupportedDB,
+            host: config.postgresDatabase.host,
+            port: config.postgresDatabase.port,
+            username: config.postgresDatabase.username,
+            password: config.postgresDatabase.password,
+            database: config.postgresDatabase.database,
             autoLoadEntities: true,
             synchronize: true,
           }),

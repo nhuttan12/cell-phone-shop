@@ -8,7 +8,6 @@ import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 import { UserService } from '../user/user.service';
 import { UserResponse } from '../user/dto/user-response.dto';
-import { BaseResponse } from '../../common/response/base.response';
 import { UserMessageLogs } from '../user/messages/user.message-logs';
 import { FailureResponse } from '../../common/response/failer.response';
 import { Mapper } from '@automapper/core';
@@ -41,13 +40,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: JwtPayload): Promise<JwtPayload | FailureResponse> {
     // 1. Get payload from token
     this.logger.debug('Get payload from token', payload);
-    const user: UserResponse | BaseResponse =
+    const user: UserResponse | FailureResponse =
       await this.userService.getUserFromPayload(payload);
     this.logger.debug('Get user from payload', user);
 
     // 2. Check user exist
     this.logger.debug('Check user exist', user);
-    if (!user) {
+    if (user instanceof FailureResponse) {
       this.logger.error(UserMessageLogs.USER_NOT_FOUND);
       return new FailureResponse(
         UserMessageLogs.USER_NOT_FOUND,
