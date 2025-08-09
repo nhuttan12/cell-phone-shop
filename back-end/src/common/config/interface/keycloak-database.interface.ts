@@ -5,5 +5,5 @@ export interface KeycloakDatabaseConfig {
   username: string;
   password: string;
   database: string;
-  realmId: string;
+  realmID: string;
 }

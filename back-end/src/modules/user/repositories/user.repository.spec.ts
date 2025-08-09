@@ -19,7 +19,7 @@ describe('UserRepository', () => {
   const fakeUser: KeycloakUser = {
     id: userID,
     username: 'test-user',
-    realmId: 'realm-test',
+    realmID: 'realm-test',
     email: 'test-email',
     firstName: 'test-first-name',
     lastName: 'test-last-name',
@@ -47,7 +47,7 @@ describe('UserRepository', () => {
 
     mockConfig = {
       keycloakDatabase: {
-        realmId: 'realm-test',
+        realmID: 'realm-test',
         dialect: 'postgres',
         host: 'localhost',
         port: 5432,

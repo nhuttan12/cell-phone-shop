@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'external-content.duckduckgo.com',
-      }
-    ]
+      },
+    ],
   },
   allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
 };

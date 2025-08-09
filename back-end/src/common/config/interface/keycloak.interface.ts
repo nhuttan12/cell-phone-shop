@@ -1,7 +1,7 @@
 export interface KeycloakConfig {
   url: string;
   realm: string;
-  clientId: string;
+  clientID: string;
   secret: string;
   logLevels: string;
   useNestLogger: boolean;

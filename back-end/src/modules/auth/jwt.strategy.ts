@@ -25,7 +25,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      audience: config.keycloak.clientId,
+      audience: config.keycloak.clientID,
       issuer: config.keycloak.issuer,
       algorithms: ['RS256'],
       secretOrKeyProvider: passportJwtSecret({

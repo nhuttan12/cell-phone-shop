@@ -50,7 +50,7 @@ export class KeycloakUser {
 
   @Column({ name: 'realm_id' })
   @AutoMap()
-  realmId: string;
+  realmID: string;
 
   @OneToMany(() => UserRoleMapping, (mapping: UserRoleMapping) => mapping.user)
   roleMappings: UserRoleMapping[];

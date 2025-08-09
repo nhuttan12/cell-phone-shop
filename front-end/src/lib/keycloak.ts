@@ -1,5 +1,5 @@
 import Keycloak from 'keycloak-js';
-import { config} from '@/config/config.env'
+import { config } from '@/config/config.env';
 
 const keycloak = Keycloak({
   url: config.keycloak.url,

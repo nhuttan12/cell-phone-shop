@@ -25,14 +25,14 @@ export const validationSchema: ObjectSchema = Joi.object({
       username: Joi.string().required(),
       password: Joi.string().required(),
       database: Joi.string().required(),
-      realmId: Joi.string().required(),
+      realmID: Joi.string().required(),
     }).required(),
   }).required(),
 
   keycloak: Joi.object({
     url: Joi.string().required(),
     realm: Joi.string().required(),
-    clientId: Joi.string().required(),
+    clientID: Joi.string().required(),
     secret: Joi.string().required(),
     logLevels: Joi.string()
       .valid('verbose', 'debug', 'info', 'warn', 'error')

@@ -8,7 +8,7 @@ import { AppConfigService } from '../../../common/config/app-config.service';
 
 @Injectable()
 export class UserRepository {
-  private readonly realmId: string;
+  private readonly realmID: string;
 
   constructor(
     @InjectRepository(KeycloakUser)
@@ -18,7 +18,7 @@ export class UserRepository {
     private readonly dataSource: DataSource,
     private readonly config: AppConfigService,
   ) {
-    this.realmId = this.config.keycloakDatabase.realmId;
+    this.realmID = this.config.keycloakDatabase.realmID;
   }
 
   async getUserByUserID(UserID: string): Promise<KeycloakUser | null> {
@@ -30,8 +30,8 @@ export class UserRepository {
         .createQueryBuilder('user')
         .leftJoinAndSelect('user.roleMappings', 'urm')
         .leftJoinAndSelect('urm.role', 'role')
-        .where('user.realmId = :realmId', {
-          realmId: this.realmId,
+        .where('user.realmID = :realmID', {
+          realmID: this.realmID,
         })
         .andWhere('user.id = :id', { id: UserID })
         .getOne();

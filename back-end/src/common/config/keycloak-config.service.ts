@@ -15,7 +15,7 @@ export class KeycloakConfigService implements KeycloakConnectOptionsFactory {
     return {
       authServerUrl: keycloak.url,
       realm: keycloak.realm,
-      clientId: keycloak.clientId,
+      clientId: keycloak.clientID,
       secret: keycloak.secret,
       logLevels: ['verbose', 'debug', 'info', 'warn', 'error'] as LogLevel[],
       useNestLogger: keycloak.useNestLogger,

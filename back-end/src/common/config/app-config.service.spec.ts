@@ -33,7 +33,7 @@ describe('AppConfigService', () => {
     issuer: 'http://localhost:8080/auth/realms/test',
     url: 'http://localhost:8080/auth',
     realm: 'test',
-    clientId: 'test',
+    clientID: 'test',
     secret: 'test',
     logLevels: 'verbose',
     useNestLogger: true,
@@ -43,7 +43,7 @@ describe('AppConfigService', () => {
   };
 
   const mockKeycloakDatabaseConfig: KeycloakDatabaseConfig = {
-    realmId: 'test',
+    realmID: 'test',
     dialect: 'postgres',
     host: 'localhost',
     port: 3306,

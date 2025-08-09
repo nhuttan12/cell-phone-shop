@@ -26,7 +26,7 @@ describe('UserService', () => {
   const mockKeycloakUser: KeycloakUser = {
     id: 'test-id',
     username: 'test-username',
-    realmId: 'test-realm-id',
+    realmID: 'test-realm-id',
     email: 'test@example.com',
     firstName: 'test-first-name',
     lastName: 'test-last-name',

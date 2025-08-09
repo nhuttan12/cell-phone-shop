@@ -16,7 +16,7 @@ export class KeycloakRole {
   clientRealmConstraint: string;
 
   @Column({ name: 'realm_id' })
-  realmId: string;
+  realmID: string;
 
   @Column({ name: 'client' })
   client: string;
