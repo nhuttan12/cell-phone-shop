@@ -1,5 +1,6 @@
 import ProductCard from "@/components/product/product-card";
-import { Product } from "@/lib/dtos/product/product.dto";
+import { Product } from "@/type/product/product.dto";
+import Header from "@/components/header/header";
 
 const sampleProduct: Product = {
   id: "p001",
@@ -18,7 +19,8 @@ const sampleProduct: Product = {
 export default function Home() {
   return (
     <>
-      <ProductCard product={sampleProduct}/>
+      {/*<ProductCard product={sampleProduct}/>*/}
+      <Header/>
     </>
   );
 }

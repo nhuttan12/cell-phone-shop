@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Sign up',
-  description: 'Sign up',
+  title: 'Đăng ký',
+  description: 'Đăng ký',
 };
 
 export default function SignUpLayout({

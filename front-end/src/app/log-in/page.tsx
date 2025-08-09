@@ -16,13 +16,13 @@ export default function LogIn() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle>Đăng nhập vào tài khoản</CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Nhập thông tin đăng nhập ở bên dưới để đăng nhập vào tài khoản
         </CardDescription>
         <CardAction>
           <Link href={'/sign-up'}>
-            <Button variant="link">Sign Up</Button>
+            <Button variant="link">Đăng ký</Button>
           </Link>
         </CardAction>
       </CardHeader>
@@ -30,22 +30,21 @@ export default function LogIn() {
         <form>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="username">Tài khoản</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
+                id="username"
+                type="text"
                 required
               />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Mật khẩu</Label>
                 <a
                   href="#"
                   className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                 >
-                  Forgot your password?
+                  Quên mật khẩu?
                 </a>
               </div>
               <Input id="password" type="password" required/>
@@ -58,7 +57,7 @@ export default function LogIn() {
           Login
         </Button>
         <Button variant="outline" className="w-full">
-          Login with Google <FcGoogle/>
+          Đăng nhập bằng Google <FcGoogle/>
         </Button>
       </CardFooter>
     </Card>

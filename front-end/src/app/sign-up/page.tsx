@@ -16,13 +16,13 @@ export default function SignUp() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Sign up your account</CardTitle>
+        <CardTitle>Đăng ký tài khoản</CardTitle>
         <CardDescription>
-          Enter your information below to sign up your account
+          Nhập thông tin vào các ô bên dưới để đăng ký tài khoản
         </CardDescription>
         <CardAction>
           <Link href={'/log-in'}>
-            <Button variant="link">Log in</Button>
+            <Button variant="link">Đăng nhập</Button>
           </Link>
         </CardAction>
       </CardHeader>
@@ -30,11 +30,10 @@ export default function SignUp() {
         <form>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username">Tài khoản</Label>
               <Input
                 id="username"
                 type="text"
-                placeholder="username"
                 required
               />
             </div>
@@ -43,19 +42,18 @@ export default function SignUp() {
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
                 required
               />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Mật khẩu</Label>
               </div>
               <Input id="password" type="password" required/>
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="retypePassword">Re-type Password</Label>
+                <Label htmlFor="retypePassword">Nhập lại mật khẩu</Label>
               </div>
               <Input id="retypePassword" type="password" required/>
             </div>
@@ -64,10 +62,10 @@ export default function SignUp() {
       </CardContent>
       <CardFooter className="flex-col gap-2">
         <Button type="submit" className="w-full">
-          Sign up
+          Đăng ký
         </Button>
         <Button variant="outline" className="w-full">
-          Sign up with Google <FcGoogle/>
+          Đăng ký với tài khoản Google <FcGoogle/>
         </Button>
       </CardFooter>
     </Card>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-export default function Error() {
+export default function NotFound() {
   return (
     <div
       className='min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8'>
