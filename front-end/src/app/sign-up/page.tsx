@@ -8,10 +8,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+} from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Label } from '@/components/ui/Label';
+import { Input } from '@/components/ui/Input';
 import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
 
@@ -74,12 +74,14 @@ export default function SignUp() {
       <CardFooter className='flex-col gap-2'>
         <Button
           type='submit'
-          className='w-full'>
+          className='w-full'
+        >
           Đăng ký
         </Button>
         <Button
           variant='outline'
-          className='w-full'>
+          className='w-full'
+        >
           Đăng ký với tài khoản Google <FcGoogle />
         </Button>
       </CardFooter>

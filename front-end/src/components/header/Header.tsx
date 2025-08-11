@@ -6,8 +6,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import ListItem from '@/components/list-item/list-item';
+} from '@/components/ui/NavigationMenu';
+import ListItem from '@/components/list-item/ListItem';
 import Link from 'next/link';
 import {
   CircleCheckIcon,
@@ -60,7 +60,8 @@ export default function Header() {
         <NavigationMenuItem>
           <NavigationMenuLink
             asChild
-            className={navigationMenuTriggerStyle()}>
+            className={navigationMenuTriggerStyle()}
+          >
             <Link href='/'>Điện thoại Nông Lâm</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
@@ -72,7 +73,8 @@ export default function Header() {
                 <ListItem
                   key={category.title}
                   title={category.title}
-                  href={category.href}>
+                  href={category.href}
+                >
                   {category.description}
                 </ListItem>
               ))}
@@ -82,10 +84,12 @@ export default function Header() {
         <NavigationMenuItem>
           <NavigationMenuLink
             asChild
-            className={navigationMenuTriggerStyle()}>
+            className={navigationMenuTriggerStyle()}
+          >
             <Link
               href='/cart'
-              className='flex-row items-center gap-2'>
+              className='flex-row items-center gap-2'
+            >
               <ShoppingCart color='black' />
               Giỏ hàng
             </Link>
@@ -99,7 +103,8 @@ export default function Header() {
                 <NavigationMenuLink asChild>
                   <Link
                     href='#'
-                    className='flex-row items-center gap-2'>
+                    className='flex-row items-center gap-2'
+                  >
                     <CircleHelpIcon />
                     Backlog
                   </Link>
@@ -107,7 +112,8 @@ export default function Header() {
                 <NavigationMenuLink asChild>
                   <Link
                     href='#'
-                    className='flex-row items-center gap-2'>
+                    className='flex-row items-center gap-2'
+                  >
                     <CircleIcon />
                     To Do
                   </Link>
@@ -115,7 +121,8 @@ export default function Header() {
                 <NavigationMenuLink asChild>
                   <Link
                     href='#'
-                    className='flex-row items-center gap-2'>
+                    className='flex-row items-center gap-2'
+                  >
                     <CircleCheckIcon />
                     Done
                   </Link>

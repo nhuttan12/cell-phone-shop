@@ -5,12 +5,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/components/ui/Card';
 import { Product } from '@/type/product/product.dto';
 import React from 'react';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 
 interface ProductCardProps {
   product: Product;
@@ -62,7 +62,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         <CardFooter>
           <Button
             className={'w-full'}
-            disabled={!product.inStock}>
+            disabled={!product.inStock}
+          >
             {product.inStock ? 'Add to cart' : 'Out of stock'}
           </Button>
         </CardFooter>

@@ -1,4 +1,4 @@
-import { NavigationMenuLink } from '@/components/ui/navigation-menu';
+import { NavigationMenuLink } from '@/components/ui/NavigationMenu';
 import Link from 'next/link';
 
 export default function ListItem({

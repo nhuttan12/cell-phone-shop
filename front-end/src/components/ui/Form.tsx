@@ -13,8 +13,8 @@ import {
   type FieldValues,
 } from 'react-hook-form';
 
-import { cn } from '@/lib/utils';
-import { Label } from '@/components/ui/label';
+import { cn } from '@/libs/utils';
+import { Label } from '@/components/ui/Label';
 
 const Form = FormProvider;
 
@@ -149,7 +149,8 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
       data-slot='form-message'
       id={formMessageId}
       className={cn('text-destructive text-sm', className)}
-      {...props}>
+      {...props}
+    >
       {body}
     </p>
   );

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import { Roboto } from 'next/font/google';
-import { AuthProvider } from '@/context/auth-context';
+import KeycloakInitialize from '@/components/keycloak/KeycloakInitialize';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -12,6 +12,9 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Điện thoại Nông Lâm',
   description: 'Ứng dụng bán điện thoại Nông Lâm',
+  icons: {
+    icon: '/icons/favicon.ico',
+  }
 };
 
 export default function RootLayout({
@@ -22,7 +25,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${roboto.variable} antialiased`}>
-        <AuthProvider>{children}</AuthProvider>
+        <KeycloakInitialize />
+        {children}
       </body>
     </html>
   );

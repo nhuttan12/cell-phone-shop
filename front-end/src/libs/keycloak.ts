@@ -1,9 +1,9 @@
 import Keycloak from 'keycloak-js';
-import { config } from '@/config/config.env';
+import { config } from '@/configs/config.env';
 
-const keycloak = Keycloak({
+const keycloak = new Keycloak({
   url: config.keycloak.url,
-  realm: config.keycloak.realmID,
+  realm: config.keycloak.realmName,
   clientId: config.keycloak.clientID,
 });
 

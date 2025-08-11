@@ -1,6 +1,6 @@
-import ProductCard from '@/components/product/product-card';
+import ProductCard from '@/components/product/ProductCard';
 import { Product } from '@/type/product/product.dto';
-import Header from '@/components/header/header';
+import Header from '@/components/header/Header';
 
 const sampleProduct: Product = {
   id: 'p001',
