@@ -1,4 +1,4 @@
-import { AppConfig } from '@/type/config/config';
+import { AppConfig } from '@/type/configs/config';
 import { KeycloakOnLoad, KeycloakPkceMethod } from 'keycloak-js';
 
 export const config: AppConfig = {

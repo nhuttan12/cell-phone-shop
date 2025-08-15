@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/Card';
-import { Product } from '@/type/product/product.dto';
+import { Product } from '@/type/products/product';
 import React from 'react';
 import Image from 'next/image';
 import { Star } from 'lucide-react';

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,11 +12,20 @@ import {
 import ListItem from '@/components/list-item/ListItem';
 import Link from 'next/link';
 import {
-  CircleCheckIcon,
+  ArrowRightFromLine,
   CircleHelpIcon,
   CircleIcon,
+  CirclePlus,
+  LogOut,
   ShoppingCart,
 } from 'lucide-react';
+import { useAuthStore } from '@/stores/authStore';
+import { clearAccessToken } from '@/libs/token';
+import React, { useEffect, useState } from 'react';
+import keycloak from '@/libs/keycloak';
+import { AuthState } from '@/type/auths/authState';
+import { decodeKeycloakToken } from '@/libs/decodeKeycloakToken';
+import { KeycloakAccessToken } from '@/type/tokens/keycloakAccessTokens';
 
 const categories: { title: string; href: string; description: string }[] = [
   {
@@ -54,6 +65,43 @@ const categories: { title: string; href: string; description: string }[] = [
 ];
 
 export default function Header() {
+  // 1. Get auth state
+  const authenticated: boolean = useAuthStore((state) => state.authenticated);
+  const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
+  const accessToken: string | null = useAuthStore(
+    (state: AuthState): string | null => state.accessToken,
+  );
+  const [fullName, setFullName] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (accessToken) {
+      const decodedToken: KeycloakAccessToken | null = decodeKeycloakToken(accessToken);
+      if (decodedToken && decodedToken.name) {
+        setFullName(decodedToken.name);
+      }
+    }
+  }, [accessToken]);
+
+  function logout() {
+    // 1. Call logout from keycloak
+    keycloak.logout({
+      redirectUri: window.location.origin,
+    });
+
+    // 2. Set auth state to false
+    setAuthenticated(false);
+
+    // 3. Clear access token
+    clearAccessToken();
+  }
+
+  function login() {
+    // 1. Call login from keycloak
+    keycloak.login({
+      locale: 'vi',
+    });
+  }
+
   return (
     <NavigationMenu viewport={false}>
       <NavigationMenuList>
@@ -95,42 +143,69 @@ export default function Header() {
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Người dùng</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className='grid w-[200px] gap-4'>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href='#'
-                    className='flex-row items-center gap-2'
-                  >
-                    <CircleHelpIcon />
-                    Backlog
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href='#'
-                    className='flex-row items-center gap-2'
-                  >
-                    <CircleIcon />
-                    To Do
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href='#'
-                    className='flex-row items-center gap-2'
-                  >
-                    <CircleCheckIcon />
-                    Done
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+        {authenticated ? (
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>{fullName || 'Người dùng'}</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className='grid w-[200px] gap-4'>
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href='#'
+                      className='flex-row items-center gap-2'
+                    >
+                      <CircleHelpIcon />
+                      Backlog
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href='#'
+                      className='flex-row items-center gap-2'
+                    >
+                      <CircleIcon />
+                      To Do
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href='#'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        logout();
+                      }}
+                      className='flex-row items-center gap-2'
+                    >
+                      <LogOut />
+                      Đăng xuất
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        ) : (
+          <>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link
+                  href='#'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    login();
+                  }}
+                  className='flex-row items-center gap-2'
+                >
+                  <ArrowRightFromLine />
+                  Đăng nhập
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );

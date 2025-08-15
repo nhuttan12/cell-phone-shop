@@ -1,5 +1,5 @@
 import ProductCard from '@/components/product/ProductCard';
-import { Product } from '@/type/product/product.dto';
+import { Product } from '@/type/products/product';
 import Header from '@/components/header/Header';
 
 const sampleProduct: Product = {
@@ -20,7 +20,7 @@ const sampleProduct: Product = {
 export default function Home() {
   return (
     <>
-      {/*<ProductCard product={sampleProduct}/>*/}
+      {/*<ProductCard products={sampleProduct}/>*/}
       <Header />
     </>
   );

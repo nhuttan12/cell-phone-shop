@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import { AuthState } from '@/type/auth/auth-state.interface';
-import keycloak from '@/libs/keycloak';
+import { AuthState } from '@/type/auths/authState';
 import { persist } from 'zustand/middleware';
 
 export const useAuthStore = create<AuthState>()(
@@ -10,24 +9,20 @@ export const useAuthStore = create<AuthState>()(
       setAuthenticated: (auth: boolean) => set({ authenticated: auth }),
 
       accessToken: null,
-      refreshToken: null,
-      setTokens: (accessToken: string, refreshToken: string) =>
+      setAccessTokens: (accessToken: string) =>
         set({
           accessToken,
-          refreshToken,
         }),
       clearTokens: () =>
         set({
           accessToken: null,
-          refreshToken: null,
         }),
     }),
     {
-      name: 'auth-storage',
+      name: 'auths-storage',
       partialize: (state: AuthState) => ({
         authenticated: state.authenticated,
         accessToken: state.accessToken,
-        refreshToken: state.refreshToken,
       }),
     },
   ),

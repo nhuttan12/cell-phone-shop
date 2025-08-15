@@ -1,6 +1,6 @@
 import { KeycloakOnLoad, KeycloakPkceMethod } from 'keycloak-js';
 
-export interface KeycloakConfig {
+export interface Keycloak {
   url: string;
   realmID: string;
   realmName: string;
