@@ -27,7 +27,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             alt={product.name}
             width={250}
             height={200}
-            className={'object-cover ml-auto mr-auto'}
+            className={'object-cover ml-auto mr-auto transition-transform duration-500 hover:scale-125 ease-in-out'}
           />
         </div>
 

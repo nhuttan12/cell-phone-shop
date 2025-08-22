@@ -9,13 +9,12 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/NavigationMenu';
-import ListItem from '@/components/list-item/ListItem';
+import ListItem from '@/components/ListItem/ListItem';
 import Link from 'next/link';
 import {
   ArrowRightFromLine,
   CircleHelpIcon,
   CircleIcon,
-  CirclePlus,
   LogOut,
   ShoppingCart,
 } from 'lucide-react';
@@ -75,7 +74,8 @@ export default function Header() {
 
   useEffect(() => {
     if (accessToken) {
-      const decodedToken: KeycloakAccessToken | null = decodeKeycloakToken(accessToken);
+      const decodedToken: KeycloakAccessToken | null =
+        decodeKeycloakToken(accessToken);
       if (decodedToken && decodedToken.name) {
         setFullName(decodedToken.name);
       }
@@ -83,7 +83,7 @@ export default function Header() {
   }, [accessToken]);
 
   function logout() {
-    // 1. Call logout from keycloak
+    // 1. Call logout from Keycloak
     keycloak.logout({
       redirectUri: window.location.origin,
     });
@@ -96,14 +96,15 @@ export default function Header() {
   }
 
   function login() {
-    // 1. Call login from keycloak
-    keycloak.login({
-      locale: 'vi',
-    });
+    // 1. Call login from Keycloak
+    keycloak.login();
   }
 
   return (
-    <NavigationMenu viewport={false}>
+    <NavigationMenu
+      viewport={false}
+      className='mx-auto z-50 flex-1 items-start'
+    >
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuLink
@@ -145,7 +146,9 @@ export default function Header() {
         </NavigationMenuItem>
         {authenticated ? (
           <NavigationMenuItem>
-            <NavigationMenuTrigger>{fullName || 'Người dùng'}</NavigationMenuTrigger>
+            <NavigationMenuTrigger>
+              {fullName || 'Người dùng'}
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className='grid w-[200px] gap-4'>
                 <li>
