@@ -2,8 +2,10 @@
 
 import {
   Dialog,
-  DialogContent, DialogDescription,
-  DialogHeader, DialogTitle,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog';
 import { Button } from '@/components/ui/Button';
@@ -43,25 +45,60 @@ export default function FilterDialog() {
             <Funnel />
           </Button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[425px]'>
+        <DialogContent className='sm:max-w-[425px] max-h-[500px] !max-w-[700px] overflow-y-auto'>
           <DialogHeader>
-            <DialogTitle>Filter Products</DialogTitle>
-            <DialogDescription>
-              Select the categories to filter the products.
-            </DialogDescription>
+            <DialogTitle>Lọc sản phẩm</DialogTitle>
+            <DialogDescription></DialogDescription>
           </DialogHeader>
-          <div className='flex flex-wrap gap-2'>
-            {categories.map((category: string) => (
-              <FilterButton
-                key={category}
-                id={category}
-                label={category}
-                isChecked={selectedCategories.includes(category)}
-                onCheckedChange={(isChecked: boolean): void =>
-                  handleCheckedChange(category, isChecked)
-                }
-              />
-            ))}
+          <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-2'>
+              <label>Hãng sản xuất</label>
+              <div className='flex flex-wrap gap-2'>
+                {categories.map((category: string) => (
+                  <FilterButton
+                    key={category}
+                    id={category}
+                    label={category}
+                    isChecked={selectedCategories.includes(category)}
+                    onCheckedChange={(isChecked: boolean): void =>
+                      handleCheckedChange(category, isChecked)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+            <div className='flex flex-col gap-2'>
+              <label>Màn hình</label>
+              <div className='flex flex-wrap gap-2'>
+                {categories.map((category: string) => (
+                  <FilterButton
+                    key={category}
+                    id={category}
+                    label={category}
+                    isChecked={selectedCategories.includes(category)}
+                    onCheckedChange={(isChecked: boolean): void =>
+                      handleCheckedChange(category, isChecked)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+            <div className='flex flex-col gap-2'>
+              <label>Kích thước màn hình</label>
+              <div className='flex flex-wrap gap-2'>
+                {categories.map((category: string) => (
+                  <FilterButton
+                    key={category}
+                    id={category}
+                    label={category}
+                    isChecked={selectedCategories.includes(category)}
+                    onCheckedChange={(isChecked: boolean): void =>
+                      handleCheckedChange(category, isChecked)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </DialogContent>
       </form>

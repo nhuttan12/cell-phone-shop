@@ -1,15 +1,26 @@
 import { Product } from '@/type/products/product';
 import ProductList from '@/components/ProductList/ProductList';
 import FilterDialog from '@/components/FIlterDialog/FilterDialog';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/Select';
 
 interface CategoryPageProps {
   params: { slug: string };
 }
 
 export async function generateMetadata({ params }: CategoryPageProps) {
+  const { slug } = await params;
+
   return {
-    title: `Danh mục ${params.slug}`,
-    description: `Danh mục ${params.slug}`,
+    title: `Danh mục ${slug}`,
+    description: `Danh mục ${slug}`,
   };
 }
 
@@ -86,16 +97,40 @@ const sampleProductList: Product[] = [
   },
 ];
 
-export default function CategoriesSlugPage({ params }: CategoryPageProps) {
+export default async function CategoriesSlugPage({
+  params,
+}: CategoryPageProps) {
+  const { slug } = await params;
+
   return (
     <div>
-      <h1>Category: {params.slug}</h1>
+      <h1>Category: {slug}</h1>
 
-      {/*Filter diablog*/}
-      <FilterDialog />
+      <div className='flex flex-row place-content-between'>
+        {/*Filter diablog*/}
+        <FilterDialog />
+
+        {/*Sort*/}
+        <Select>
+          <SelectTrigger className='w-[180px]'>
+            <SelectValue placeholder='Sắp xếp' className='select-none' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup className='select-none'>
+              <SelectLabel></SelectLabel>
+              <SelectItem value='a-z'>A-z</SelectItem>
+              <SelectItem value='z-a'>Z-a</SelectItem>
+              <SelectItem value='date-descend'>Ngày giảm dần</SelectItem>
+              <SelectItem value='date-ascend'>Ngày tăng dần</SelectItem>
+              <SelectItem value='price-descend'>Giá giảm dần</SelectItem>
+              <SelectItem value='price-ascend'>Giá tăng dần</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
 
       {/* Fetch and show products for this category */}
-      <ProductList productList={sampleProductList}/>
+      <ProductList productList={sampleProductList} />
     </div>
   );
 }

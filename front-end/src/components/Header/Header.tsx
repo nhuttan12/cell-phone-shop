@@ -25,6 +25,7 @@ import keycloak from '@/libs/keycloak';
 import { AuthState } from '@/type/auths/authState';
 import { decodeKeycloakToken } from '@/libs/decodeKeycloakToken';
 import { KeycloakAccessToken } from '@/type/tokens/keycloakAccessTokens';
+import InputWithIcon from '@/components/InputWithIcon/InputWithIcon';
 
 const categories: { title: string; href: string; description: string }[] = [
   {
@@ -103,7 +104,7 @@ export default function Header() {
   return (
     <NavigationMenu
       viewport={false}
-      className='mx-auto z-50 flex-1 items-start'
+      className='mx-auto z-50 flex-1 items-start pt-3'
     >
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -129,6 +130,9 @@ export default function Header() {
               ))}
             </ul>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem className='!w-[300px]'>
+          <InputWithIcon name='search' className='w-full' placeholder='Tìm kiếm'/>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink
