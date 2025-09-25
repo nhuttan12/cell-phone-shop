@@ -1,10 +1,17 @@
+/**
+ * @description User repository
+ * @author Nhut Tan
+ * @since 2025-08-07
+ * @version 1.0.0
+ */
+
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { KeycloakUser } from '../entities/keycloak-user.entity';
 import { DataSource, Repository } from 'typeorm';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
-import { AppConfigService } from '../../../common/config/app-config.service';
+import { AppConfigService } from '../../../common/config/app-config/app-config.service';
 
 @Injectable()
 export class UserRepository {

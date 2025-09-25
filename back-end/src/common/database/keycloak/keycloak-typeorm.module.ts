@@ -1,8 +1,18 @@
+/**
+ * @description Keycloak typeorm module
+ * @author Nhut Tan
+ * @since 2025-09-25
+ * @version 1.0.0
+ */
+
 import { DynamicModule, Module } from '@nestjs/common';
-import { AppConfigModule } from '../../config/app-config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppConfigService, SupportedDB } from '../../config/app-config.service';
 import { KeycloakUser } from '../../../modules/user/entities/keycloak-user.entity';
+import { AppConfigModule } from '../../config/app-config/app-config.module';
+import {
+  AppConfigService,
+  SupportedDB,
+} from '../../config/app-config/app-config.service';
 
 @Module({})
 export class KeycloakTypeormModule {

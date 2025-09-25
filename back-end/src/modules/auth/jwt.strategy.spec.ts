@@ -1,4 +1,4 @@
-import { AppConfigService } from '../../common/config/app-config.service';
+import { AppConfigService } from '../../common/config/app-config/app-config.service';
 import { UserService } from '../user/user.service';
 import { JwtPayload } from './dto/jwt-payload.dto';
 import { UserResponse } from '../user/dto/user-response.dto';

@@ -1,10 +1,17 @@
+/**
+ * @description Keycloak config service
+ * @author Nhut Tan
+ * @since 2025-09-25
+ * @version 1.0.0
+ */
+
 import { Injectable, LogLevel } from '@nestjs/common';
 import {
   KeycloakConnectOptions,
   KeycloakConnectOptionsFactory,
 } from 'nest-keycloak-connect';
-import { AppConfigService } from './app-config.service';
-import { KeycloakConfig } from './interface/keycloak.interface';
+import { AppConfigService } from '../app-config/app-config.service';
+import { KeycloakConfig } from '../app-config/interface/keycloak.interface';
 
 @Injectable()
 export class KeycloakConfigService implements KeycloakConnectOptionsFactory {

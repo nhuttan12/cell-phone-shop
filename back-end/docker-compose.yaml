@@ -1,3 +1,5 @@
+name: cell-phone-shop
+
 services:
   postgres:
     image: postgres:15-alpine

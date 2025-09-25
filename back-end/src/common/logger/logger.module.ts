@@ -1,8 +1,9 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { AppConfigService } from '../config/app-config.service';
+import { AppConfigService } from '../config/app-config/app-config.service';
 import { WinstonModule } from 'nest-winston';
 import { format, transports } from 'winston';
 import { utilities as nestWinstonModuleUtilities } from 'nest-winston/dist/winston.utilities';
+import { AppConfigModule } from '../config/app-config/app-config.module';
 
 @Global()
 @Module({
@@ -15,7 +16,9 @@ export class LoggerModule {
     return {
       module: LoggerModule,
       imports: [
+        AppConfigModule,
         WinstonModule.forRootAsync({
+          imports: [AppConfigModule],
           inject: [AppConfigService],
           useFactory: (config: AppConfigService) => {
             const httpConfig = config.http;

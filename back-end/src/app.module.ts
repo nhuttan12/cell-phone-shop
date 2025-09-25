@@ -1,3 +1,10 @@
+/**
+ * @description App module
+ * @author Nhut Tan
+ * @since 2025-08-07
+ * @version 1.0.0
+ */
+
 import { Module } from '@nestjs/common';
 import {
   AuthGuard,
@@ -6,32 +13,32 @@ import {
   RoleGuard,
 } from 'nest-keycloak-connect';
 import { ConfigModule } from '@nestjs/config';
-import configuration from './common/config/configuration/configuration';
-import { validationSchema } from './common/config/schema/schema-validation';
+import { validationSchema } from './common/config/app-config/schema/schema-validation';
 import { APP_GUARD } from '@nestjs/core';
 import { LoggerModule } from './common/logger/logger.module';
-import { KeycloakConfigService } from './common/config/keycloak-config.service';
-import { AppConfigModule } from './common/config/app-config.module';
-import { TypeormModule } from './common/database/typeorm/typeorm.module';
-import { KeycloakTypeormModule } from './common/database/keycloak/keycloak-typeorm.module';
-import { AutoMapperModule } from './common/auto-mapper/auto-mapper.module';
+import { KeycloakConfigService } from './common/config/keycloak/keycloak-config.service';
+import { AppConfigModule } from './common/config/app-config/app-config.module';
+import { DatabaseModule } from './common/database/typeorm/database.module';
+import { KeycloakConfigModule } from './common/config/keycloak/keycloak-config.module';
 
 @Module({
   imports: [
-    AppConfigModule,
     ConfigModule.forRoot({
-      load: [configuration],
       isGlobal: true,
+      envFilePath: '.env',
       validationSchema,
     }),
+
+    AppConfigModule,
+    KeycloakConfigModule,
+
     KeycloakConnectModule.registerAsync({
+      imports: [KeycloakConfigModule],
       useExisting: KeycloakConfigService,
-      imports: [ConfigModule],
     }),
     LoggerModule.forRootAsync(),
-    TypeormModule.forRootAsync(),
-    KeycloakTypeormModule.forRootAsync(),
-    AutoMapperModule,
+    // DatabaseModule,
+    // KeycloakTypeormModule.forRootAsync(),
   ],
   providers: [
     {

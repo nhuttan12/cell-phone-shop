@@ -1,15 +1,16 @@
-import { AutoMap } from '@automapper/classes';
+/**
+ * @description User response
+ * @author Nhut Tan
+ * @since 2025-08-07
+ * @version 1.0.0
+ */
 
 export class UserResponse {
-  @AutoMap()
   id: string;
 
-  @AutoMap()
   username: string;
 
-  @AutoMap()
   email: string;
 
-  @AutoMap()
   role: string[];
 }

@@ -1,7 +1,7 @@
 import { Logger } from 'winston';
 import { UserRepository } from './user.repository';
 import { DataSource, SelectQueryBuilder } from 'typeorm';
-import { AppConfigService } from '../../../common/config/app-config.service';
+import { AppConfigService } from '../../../common/config/app-config/app-config.service';
 import { KeycloakUser } from '../entities/keycloak-user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';

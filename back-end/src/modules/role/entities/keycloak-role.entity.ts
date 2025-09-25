@@ -1,3 +1,10 @@
+/**
+ * @description Keycloak role entity
+ * @author Nhut Tan
+ * @since 2025-08-07
+ * @version 1.0.0
+ */
+
 import { Column, Entity, OneToMany } from 'typeorm';
 import { UserRoleMapping } from '../../user/entities/user-role-mapping.entity';
 

@@ -1,3 +1,10 @@
+/**
+ * @description User service
+ * @author Nhut Tan
+ * @since 2025-08-07
+ * @version 1.0.0
+ */
+
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Logger } from 'winston';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
@@ -5,10 +12,9 @@ import { JwtPayload } from '../auth/dto/jwt-payload.dto';
 import { KeycloakUser } from './entities/keycloak-user.entity';
 import { UserRepository } from './repositories/user.repository';
 import { UserMessageLogs } from './messages/user.message-logs';
-import { InjectMapper } from '@automapper/nestjs';
-import { Mapper } from '@automapper/core';
 import { UserResponse } from './dto/user-response.dto';
 import { FailureResponse } from '../../common/response/failer.response';
+import { UserMapper } from './mappers/user.mapper';
 
 @Injectable()
 export class UserService {
@@ -16,8 +22,7 @@ export class UserService {
     @Inject(WINSTON_MODULE_NEST_PROVIDER)
     private readonly logger: Logger,
     private readonly userRepo: UserRepository,
-    @InjectMapper()
-    private readonly mapper: Mapper,
+    private readonly userMapper: UserMapper,
   ) {}
 
   async getUserFromPayload(
@@ -44,11 +49,7 @@ export class UserService {
 
     // 4. Mapping user to user response
     this.logger.verbose('Mapping user to user response');
-    const userResponse: UserResponse = this.mapper.map(
-      user,
-      KeycloakUser,
-      UserResponse,
-    );
+    const userResponse: UserResponse = this.userMapper.toUserResponse(user);
     this.logger.debug('Mapping user to user response', userResponse);
 
     // 5. Return user response

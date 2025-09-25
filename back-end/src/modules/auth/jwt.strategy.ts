@@ -1,7 +1,14 @@
+/**
+ * @description JWT strategy
+ * @author Nhut Tan
+ * @since 2025-08-07
+ * @version 1.0.0
+ */
+
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { AppConfigService } from '../../common/config/app-config.service';
+import { AppConfigService } from '../../common/config/app-config/app-config.service';
 import { passportJwtSecret } from 'jwks-rsa';
 import { JwtPayload } from './dto/jwt-payload.dto';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
@@ -10,8 +17,7 @@ import { UserService } from '../user/user.service';
 import { UserResponse } from '../user/dto/user-response.dto';
 import { UserMessageLogs } from '../user/messages/user.message-logs';
 import { FailureResponse } from '../../common/response/failer.response';
-import { Mapper } from '@automapper/core';
-import { InjectMapper } from '@automapper/nestjs';
+import { AuthMapper } from './mappers/auth.mapper';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -20,8 +26,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     @Inject(WINSTON_MODULE_NEST_PROVIDER)
     private readonly logger: Logger,
     private readonly userService: UserService,
-    @InjectMapper()
-    private readonly mapper: Mapper,
+    private readonly authMapper: AuthMapper,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -56,11 +61,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     // 3. Mapping user response to jwt payload
     this.logger.verbose('Mapping user response to jwt payload');
-    const jwtPayload: JwtPayload = this.mapper.map(
-      user,
-      UserResponse,
-      JwtPayload,
-    );
+    const jwtPayload: JwtPayload = this.authMapper.toJwtPayload(user);
     this.logger.debug('Mapping user response to jwt payload', jwtPayload);
 
     // 4. Return jwt payload
