@@ -1,8 +1,8 @@
 export interface AuthState {
-  authenticated: boolean;
-  setAuthenticated: (auth: boolean) => void;
+	authenticated: boolean;
+	setAuthenticated: (auth: boolean) => void;
 
-  accessToken: string | null;
-  setAccessTokens: (accessToken: string) => void;
-  clearTokens: () => void;
+	accessToken: string | null;
+	setAccessTokens: (accessToken: string) => void;
+	clearTokens: () => void;
 }
